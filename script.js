@@ -1,79 +1,73 @@
-// script.js
-function add(a, b) {
-	return a + b;
+const display = document.getElementById("display");
+let firstOperand = null;
+let secondOperand = null;
+let currentOperator = null;
+let shouldResetDisplay = false;
+
+function resetDisplay() {
+	display.innerText = "0";
+	shouldResetDisplay = false;
 }
 
-function subtract(a, b) {
-	return a - b;
+function clear() {
+	display.innerText = "0";
+	firstOperand = null;
+	secondOperand = null;
+	currentOperator = null;
 }
 
-function multiply(a, b) {
-	return a * b;
+function appendNumber(number) {
+	if (display.innerText === "0" || shouldResetDisplay) {
+		display.innerText = number;
+		shouldResetDisplay = false;
+	} else {
+		display.innerText += number;
+	}
 }
 
-function divide(a, b) {
-	return b === 0 ? "Error" : a / b;
+function chooseOperator(operator) {
+	if (currentOperator !== null) evaluate();
+	firstOperand = parseFloat(display.innerText);
+	currentOperator = operator;
+	shouldResetDisplay = true;
 }
+
+function evaluate() {
+	if (currentOperator === null || shouldResetDisplay) return;
+	if (currentOperator === "/" && display.innerText === "0") {
+		display.innerText = "Error";
+		return;
+	}
+	secondOperand = parseFloat(display.innerText);
+	display.innerText = operate(currentOperator, firstOperand, secondOperand);
+	currentOperator = null;
+}
+
 function operate(operator, a, b) {
 	switch (operator) {
 		case "+":
-			return add(a, b);
+			return a + b;
 		case "-":
-			return subtract(a, b);
+			return a - b;
 		case "*":
-			return multiply(a, b);
+			return a * b;
 		case "/":
-			return divide(a, b);
+			return a / b;
 		default:
 			return null;
 	}
 }
-let firstNumber = "";
-let secondNumber = "";
-let currentOperator = null;
-let shouldResetDisplay = false;
 
-const display = document.getElementById("display");
-
-function updateDisplay(value) {
-	display.textContent = value;
-}
-
-function appendNumber(number) {
-	if (display.textContent === "0" || shouldResetDisplay) {
-		display.textContent = number;
-		shouldResetDisplay = false;
-	} else {
-		display.textContent += number;
-	}
-}
-document.getElementById("clear").addEventListener("click", clear);
-
-function clear() {
-	display.textContent = "0";
-	firstNumber = "";
-	secondNumber = "";
-	currentOperator = null;
-}
-
-
-document.getElementById("equals").addEventListener("click", evaluate);
-
-function evaluate() {
-	if (currentOperator === null || shouldResetDisplay) return;
-	if (currentOperator === "/" && display.textContent === "0") {
-		alert("Cannot divide by zero");
-		clear();
-		return;
-	}
-	secondNumber = display.textContent;
-	display.textContent = roundResult(
-		operate(currentOperator, parseFloat(firstNumber), parseFloat(secondNumber))
-	);
-	currentOperator = null;
-}
-
-function roundResult(number) {
-	return Math.round(number * 1000) / 1000;
-}
-    
+document.querySelectorAll(".btn").forEach((button) => {
+	button.addEventListener("click", () => {
+		if (button.id === "clear") clear();
+		else if (button.id === "equals") evaluate();
+		else if (["add", "subtract", "multiply", "divide"].includes(button.id)) {
+			chooseOperator(button.innerText);
+		} else if (button.id === "decimal") {
+			if (!display.innerText.includes(".")) display.innerText += ".";
+		} else {
+			appendNumber(button.innerText);
+		}
+	});
+});
