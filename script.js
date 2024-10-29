@@ -55,3 +55,25 @@ function clear() {
 	secondNumber = "";
 	currentOperator = null;
 }
+
+
+document.getElementById("equals").addEventListener("click", evaluate);
+
+function evaluate() {
+	if (currentOperator === null || shouldResetDisplay) return;
+	if (currentOperator === "/" && display.textContent === "0") {
+		alert("Cannot divide by zero");
+		clear();
+		return;
+	}
+	secondNumber = display.textContent;
+	display.textContent = roundResult(
+		operate(currentOperator, parseFloat(firstNumber), parseFloat(secondNumber))
+	);
+	currentOperator = null;
+}
+
+function roundResult(number) {
+	return Math.round(number * 1000) / 1000;
+}
+    
