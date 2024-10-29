@@ -1,17 +1,29 @@
 /* styles.css */
 .calculator {
-	width: 200px;
-	margin: 0 auto;
-	text-align: center;
+    width: 200px;
+    margin: 20px auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 5px;
+    text-align: center;
 }
 .display {
-	font-size: 2rem;
-	padding: 10px;
-	background-color: #222;
-	color: #fff;
+    grid-column: span 4;
+    padding: 10px;
+    font-size: 2rem;
+    background-color: #222;
+    color: #fff;
+    text-align: right;
 }
 button {
-	width: 50px;
-	height: 50px;
-	font-size: 1.5rem;
+    font-size: 1.5rem;
+    padding: 10px;
+    background-color: #ccc;
+    border: none;
+}
+#clear {
+    grid-column: span 3;
+}
+#equals {
+    grid-column: span 2;
 }
