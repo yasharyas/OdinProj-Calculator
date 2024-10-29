@@ -47,3 +47,11 @@ function appendNumber(number) {
 		display.textContent += number;
 	}
 }
+document.getElementById("clear").addEventListener("click", clear);
+
+function clear() {
+	display.textContent = "0";
+	firstNumber = "";
+	secondNumber = "";
+	currentOperator = null;
+}
