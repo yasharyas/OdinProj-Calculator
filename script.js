@@ -28,3 +28,22 @@ function operate(operator, a, b) {
 			return null;
 	}
 }
+let firstNumber = "";
+let secondNumber = "";
+let currentOperator = null;
+let shouldResetDisplay = false;
+
+const display = document.getElementById("display");
+
+function updateDisplay(value) {
+	display.textContent = value;
+}
+
+function appendNumber(number) {
+	if (display.textContent === "0" || shouldResetDisplay) {
+		display.textContent = number;
+		shouldResetDisplay = false;
+	} else {
+		display.textContent += number;
+	}
+}
