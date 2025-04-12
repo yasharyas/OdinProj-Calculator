@@ -8,7 +8,10 @@ This is a simple, JavaScript-powered calculator with a clean and modern UI, insp
 
 ## Demo
 
+
+![Calculator Demo](calculator.gif)
 ![Calculator Demo](image.png)
+
 
 ## Features
 
