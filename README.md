@@ -1,4 +1,4 @@
-Here's a README file for your calculator project:
+
 
 ---
 
@@ -87,4 +87,4 @@ This project is open source and available under the [MIT License](LICENSE).
 
 ---
 
-Feel free to replace any placeholder links or text (like repository URL or screenshot image paths) with actual content specific to your project.
+
